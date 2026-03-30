@@ -179,4 +179,87 @@ function showTime(){
 }
 ```
 
+## Javascript Event Management
+- Event Management is about adding, removing, and controlling events.
+
+    - addEventListener() : will add the event
+    - removeEventListener() : will remove the event from listening, to remove an event listener, you must use the same named function you used to add it.
+
+ ### Blocking Events
+ - event.preventDefault() stops the browser’s default behavior for a given event.
+- Every browser event has built‑in default actions:
+
+    - Clicking a link → navigates to another page
+    - Submitting a form → reloads the page
+    - Clicking a checkbox → toggles checked state
+    - Right‑click → opens context menu
+
+- preventDefault() tells the browser:“Don’t do what you normally do. I’ll handle this myself.”
+-Syntax 
+```
+var.addEventListener("click", function(event){
+    event.preventDefault();
+    //code
+})
+```
+---
+### _onload_ & _onunload_ Events
+
+- The onload and onunload events are triggered when the user enters or leaves the page.
+
+- The onload event can be used to check the visitor's browser type and browser version, and load the proper version of the web page based on the information.
+
+- The onload and onunload events can be used to deal with cookies.
+
+### _oninput_ Events
+- it is often used to do some action while the user input data.
+```
+    <label for="name"> Name: 
+    <input id="name" placeholder="Enter your name" oninput="upperCase()">
+```
+
+### _onchange_ Events
+- it is often used in combination with validation of input fields
+- when we type or select something and if we losses focus means if we click somewhere else of the window then at that time this event will occur
+
+### Javascript _eventListener_
+
+- ***addEventListener()***
+    - The addEventListener() method attaches an event handler to the specified element.
+
+    - The addEventListener() method attaches an event handler to an element without overwriting existing event handlers.
+
+    - You can add many event handlers to one element.
+
+    - You can add many event handlers of the same type to one element, i.e two "click" events.
+
+    - You can add event listeners to any DOM object not only HTML elements. i.e the window object.
+
+    - The addEventListener() method makes it easier to control how the event reacts to bubbling.
+
+    - When using the addEventListener() method, the JavaScript is separated from the HTML markup, for better readability and allows you to add event listeners even when you do not control the HTML markup.
+
+    - You can easily remove an event listener by using the removeEventListener() method.
+
+- Syntax:
+    > element.addEventListener(event, function, useCapture);
+
+    - useCapture is an boolean value an optional, specifying whether to use event bubbling or event capturing
+
+#### Event Bubbling or Event Capturing?
+- There are two ways of event propagation in the HTML DOM, bubbling and capturing.
+
+- Event propagation is a way of defining the element order when an event occurs. If you have a <p> element inside a <div> element, and the user clicks on the <p> element, which element's "click" event should be handled first?
+
+- In bubbling the inner most element's event is handled first and then the outer: the <p> element's click event is handled first, then the <div> element's click event.
+
+- In capturing the outer most element's event is handled first and then the inner: the <div> element's click event will be handled first, then the <p> element's click event.
+
+- With the addEventListener() method you can specify the propagation type by using the "useCapture" parameter:
+
+>addEventListener(event, function, useCapture);
+- The default value is false, which will use the bubbling propagation, when the value is set to true, the event uses the capturing propagation.
+  
+
+
 
