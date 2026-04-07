@@ -1,37 +1,35 @@
 import React from 'react';
 import {useState} from 'react';
 import JobCard from './JobCard.jsx';
-function JobList({ jobs, setJobs, onDelete }){
-  const [sortField, setSortField] = useState('');
-  const [sortOrder, setSortOrder] = useState('');
-  
-  const sortedJobs = (field) => {
-    const order = sortField === field && sortOrder === 'asc' ? 'desc' : 'asc';
-    setSortField(field);
-    setSortOrder(order);
-    
-    setJobs((prev) =>{
-      return [...prev].sort((a,b) =>{
-        if (a[field] < b[field]) return order === 'asc' ? -1 : 1;
-        if (a[field] > b[field]) return order === 'asc' ? 1 : -1;
-        return 0;
-      });
-    });
-  }
+function JobList({ jobs, onDelete }){
+ const [sort, setSort] = useState('');
+ 
+ const sortedJobs = [...jobs];
+ 
+ if(sort === 'sortName'){
+   sortedJobs.sort((a,b) => b.companyName.localeCompare(a.companyName)) // desc
+ }
+ if(sort === 'sortStatus'){
+   sortedJobs.sort((a, b) => a.status.localeCompare(b.status))   // asc
+ }
+ if(sort === 'sortId'){
+   sortedJobs.sort((a,b) => a - b)  // asc
+ }
   
   return(
     <div>
-     <button onClick={() => {
-       sortedJobs('companyName');
-     }}>Sorted on Company Name : ({sortOrder})</button>
+      Sort:
+      <select value={sort} onChange={(e) => setSort(e.target.value)}>
+        <option value="" disabled>Select</option>
+        <option value="sortName">Name</option>
+        <option value="sortStatus">Status</option>
+        <option value="sortId">Id</option>
+      </select>
+      <br />
       
-      <button onClick={() => {
-       sortedJobs('status');
-     }}>Sorted on status : ({sortOrder})</button>
-     
-      {jobs.length === 0 ? <p>No jobs found</p> :
+      {sortedJobs.length === 0 ? <p>No jobs found</p> :
            <ul>
-           {jobs.map((job) =>(
+           {sortedJobs.map((job) =>(
             <JobCard 
              key={job.id}
              job={job}

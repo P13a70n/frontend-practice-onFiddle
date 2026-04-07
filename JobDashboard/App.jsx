@@ -27,7 +27,7 @@ function App() {
     {showList ? "Hide list" : "Show list"}  
     </button>
     
-    {showList &&  <JobList jobs={jobs} setJobs={setJobs} onDelete={handleDelete} />}
+    {showList &&  <JobList jobs={jobs} onDelete={handleDelete} />}
    
     <button onClick={() => setShowBoard(!showBoard)}>
     {showBoard ? "Hide Board" : "Show Board"}  
